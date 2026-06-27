@@ -72,7 +72,7 @@ function FileField({ label, value, onChange, accept = 'application/pdf', acceptL
         <button
           type="button"
           onClick={handleClick}
-          className="flex items-center gap-3 rounded-lg border border-dashed border-brand-tan/50 bg-white/40 px-4 py-3 text-left transition hover:border-brand-gold hover:bg-white/70"
+          className="flex items-center gap-3 rounded-lg border border-dashed border-brand-tan/50 bg-cream px-4 py-3 text-left transition hover:border-brand-gold hover:bg-brand-gold/5"
         >
           <span aria-hidden="true" className="text-lg">📄</span>
           <div className="flex-1">

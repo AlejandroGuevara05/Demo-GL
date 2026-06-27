@@ -20,7 +20,6 @@ function InformacionContacto({ value, onChange }) {
 
         <Field
           label="Contacto de venta"
-          placeholder="Nombre"
           value={value.contactoVenta}
           onChange={update('contactoVenta')}
           autoComplete="name"
@@ -33,30 +32,25 @@ function InformacionContacto({ value, onChange }) {
           autoComplete="organization-title"
         />
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Teléfono"
-            hint="10 dígitos"
-            placeholder="10 dígitos numéricos"
-            type="tel"
-            inputMode="numeric"
-            maxLength={10}
-            value={value.telefono}
-            onChange={(val) => update('telefono')(onlyDigits(val))}
-            autoComplete="tel"
-          />
-          <Field
-            label="Celular"
-            hint="10 dígitos"
-            placeholder="10 dígitos numéricos"
-            type="tel"
-            inputMode="numeric"
-            maxLength={10}
-            value={value.celular}
-            onChange={(val) => update('celular')(onlyDigits(val))}
-            autoComplete="tel"
-          />
-        </div>
+        <Field
+          label="Teléfono"
+          type="tel"
+          inputMode="numeric"
+          maxLength={10}
+          value={value.telefono}
+          onChange={(val) => update('telefono')(onlyDigits(val))}
+          autoComplete="tel"
+        />
+
+        <Field
+          label="Celular"
+          type="tel"
+          inputMode="numeric"
+          maxLength={10}
+          value={value.celular}
+          onChange={(val) => update('celular')(onlyDigits(val))}
+          autoComplete="tel"
+        />
 
         <Field
           label="Correo"

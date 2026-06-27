@@ -12,7 +12,6 @@ function Confirmacion({ value, onChange }) {
       <div className="mt-7 flex flex-col gap-6">
         <Field
           label="Código de registro *"
-          placeholder="Ingrese el código de registro"
           value={value.codigoRegistro}
           onChange={update('codigoRegistro')}
         />
@@ -22,14 +21,9 @@ function Confirmacion({ value, onChange }) {
           onChange={update('avisoPrivacidad')}
         >
           Acepto el{' '}
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-brand-tan underline underline-offset-2 hover:text-brand-brown"
-          >
+          <span className="font-medium text-brand-tan underline underline-offset-2">
             aviso de privacidad
-          </a>
+          </span>
           {' '}y autorizo el tratamiento de mis datos personales *
         </Checkbox>
       </div>

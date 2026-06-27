@@ -2,7 +2,6 @@ import SectionTitle from '../../../components/SectionTitle'
 import Field from '../../../components/Field'
 import SelectField from '../../../components/SelectField'
 import FileField from '../../../components/FileField'
-import { BANCOS } from '../../../constants/bancos'
 import { MONEDAS } from '../../../constants/monedas'
 
 const onlyDigits = (str) => str.replace(/\D/g, '')
@@ -21,17 +20,14 @@ function TransferenciaElectronica({ value, onChange }) {
           onChange={update('nombreCuenta')}
         />
 
-        <SelectField
+        <Field
           label="Banco"
           value={value.banco}
           onChange={update('banco')}
-          options={BANCOS}
-          placeholder="Seleccione un banco"
         />
 
         <Field
           label="Número de cuenta"
-          placeholder="10 a 12 dígitos numéricos"
           inputMode="numeric"
           maxLength={12}
           value={value.numeroCuenta}
@@ -40,8 +36,6 @@ function TransferenciaElectronica({ value, onChange }) {
 
         <Field
           label="CLABE"
-          hint="18 dígitos"
-          placeholder="18 dígitos numéricos"
           inputMode="numeric"
           maxLength={18}
           value={value.clabe}

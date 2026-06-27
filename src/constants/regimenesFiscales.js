@@ -18,5 +18,4 @@ export const REGIMENES_FISCALES = [
   { value: '624', label: '624 — Coordinados' },
   { value: '625', label: '625 — Actividades Empresariales con ingresos a través de Plataformas Tecnológicas' },
   { value: '626', label: '626 — Régimen Simplificado de Confianza (RESICO)' },
-  { value: '628', label: '628 — Hidrocarburos' },
 ]

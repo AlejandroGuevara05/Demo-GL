@@ -23,8 +23,6 @@ function InformacionFiscal({ value, onChange }) {
 
         <Field
           label="RFC"
-          hint="10 caracteres mínimo"
-          placeholder="10 a 13 caracteres"
           maxLength={13}
           value={value.rfc}
           onChange={(val) => update('rfc')(alphaNumUpper(val))}
@@ -32,49 +30,43 @@ function InformacionFiscal({ value, onChange }) {
 
         <Field
           label="Domicilio Fiscal"
-          placeholder="Calle #, colonia"
           value={value.domicilio}
           onChange={update('domicilio')}
           autoComplete="street-address"
         />
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Ciudad"
-            value={value.ciudad}
-            onChange={update('ciudad')}
-            autoComplete="address-level2"
-          />
-          <Field
-            label="Estado"
-            value={value.estado}
-            onChange={update('estado')}
-            autoComplete="address-level1"
-          />
-        </div>
+        <Field
+          label="Ciudad"
+          value={value.ciudad}
+          onChange={update('ciudad')}
+          autoComplete="address-level2"
+        />
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Código postal"
-            hint="5 dígitos"
-            placeholder="5 dígitos numéricos"
-            inputMode="numeric"
-            maxLength={5}
-            value={value.codigoPostal}
-            onChange={(val) => update('codigoPostal')(onlyDigits(val))}
-            autoComplete="postal-code"
-          />
-          <Field
-            label="País"
-            value={value.pais}
-            onChange={update('pais')}
-            autoComplete="country-name"
-          />
-        </div>
+        <Field
+          label="Estado"
+          value={value.estado}
+          onChange={update('estado')}
+          autoComplete="address-level1"
+        />
+
+        <Field
+          label="Código postal"
+          inputMode="numeric"
+          maxLength={5}
+          value={value.codigoPostal}
+          onChange={(val) => update('codigoPostal')(onlyDigits(val))}
+          autoComplete="postal-code"
+        />
+
+        <Field
+          label="País"
+          value={value.pais}
+          onChange={update('pais')}
+          autoComplete="country-name"
+        />
 
         <Field
           label="CURP"
-          placeholder="Opcional — solo para personas físicas — 18 caracteres"
           maxLength={18}
           value={value.curp}
           onChange={(val) => update('curp')(alphaNumUpper(val))}

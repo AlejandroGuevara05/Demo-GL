@@ -28,7 +28,7 @@ const initialFormState = {
     ciudad: '',
     estado: '',
     codigoPostal: '',
-    pais: 'México',
+    pais: '',
     curp: '',
     regimen: '',
   },
@@ -75,9 +75,9 @@ function RegistroProveedor() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-cream px-4 py-8 md:px-8 md:py-12">
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-          <Header />
+      <div className="min-h-screen bg-cream">
+        <Header />
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8 md:px-8 md:py-12">
           <Card className="px-6 py-12 text-center md:px-12 md:py-16">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/20">
               <span aria-hidden="true" className="text-3xl text-brand-brown">
@@ -98,10 +98,9 @@ function RegistroProveedor() {
   }
 
   return (
-    <div className="min-h-screen bg-cream px-4 py-8 md:px-8 md:py-12">
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-        <Header />
-
+    <div className="min-h-screen bg-cream">
+      <Header />
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8 md:px-8 md:py-12">
         <ProgressIndicator currentStep={currentStep} totalSteps={TOTAL_STEPS} />
 
         <Card>

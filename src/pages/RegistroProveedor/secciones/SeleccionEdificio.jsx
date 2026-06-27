@@ -1,13 +1,16 @@
+import SectionTitle from '../../../components/SectionTitle'
 import { EDIFICIOS } from '../../../constants/edificios'
 
 function SeleccionEdificio({ value, onChange }) {
   return (
-    <div className="px-6 py-8 md:px-12 md:py-10">
-      <h2 className="text-center font-serif text-xl font-medium text-brand-brown md:text-2xl">
-        Seleccione el edificio al que brindará servicios
-      </h2>
+    <div className="px-6 py-7 md:px-10 md:py-9">
+      <SectionTitle>Edificio</SectionTitle>
 
-      <fieldset className="mt-8">
+      <p className="mt-7 text-center text-sm text-ink-soft md:text-base">
+        Seleccione el edificio al que brindará servicios
+      </p>
+
+      <fieldset className="mt-5">
         <legend className="sr-only">Edificios disponibles</legend>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {EDIFICIOS.map((edificio) => {
