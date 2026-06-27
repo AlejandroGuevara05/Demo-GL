@@ -5,8 +5,9 @@ import WizardNav from '../../components/WizardNav'
 import ProgressIndicator from '../../components/ProgressIndicator'
 import SeleccionEdificio from './secciones/SeleccionEdificio'
 import InformacionContacto from './secciones/InformacionContacto'
+import InformacionFiscal from './secciones/InformacionFiscal'
 
-const TOTAL_STEPS = 2
+const TOTAL_STEPS = 3
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -19,6 +20,17 @@ const initialFormState = {
     telefono: '',
     celular: '',
     correo: '',
+  },
+  fiscal: {
+    razonSocial: '',
+    rfc: '',
+    domicilio: '',
+    ciudad: '',
+    estado: '',
+    codigoPostal: '',
+    pais: 'México',
+    curp: '',
+    regimen: '',
   },
 }
 
@@ -41,6 +53,22 @@ function RegistroProveedor() {
         c.telefono.length === 10 &&
         c.celular.length === 10 &&
         EMAIL_REGEX.test(c.correo)
+      )
+    }
+    if (step === 3) {
+      const f = formData.fiscal
+      const curpOk = f.curp === '' || f.curp.length === 18
+      return (
+        f.razonSocial.trim() !== '' &&
+        f.rfc.length >= 10 &&
+        f.rfc.length <= 13 &&
+        f.domicilio.trim() !== '' &&
+        f.ciudad.trim() !== '' &&
+        f.estado.trim() !== '' &&
+        f.codigoPostal.length === 5 &&
+        f.pais.trim() !== '' &&
+        curpOk &&
+        f.regimen !== ''
       )
     }
     return true
@@ -78,6 +106,12 @@ function RegistroProveedor() {
             <InformacionContacto
               value={formData.contacto}
               onChange={(value) => updateField('contacto', value)}
+            />
+          )}
+          {currentStep === 3 && (
+            <InformacionFiscal
+              value={formData.fiscal}
+              onChange={(value) => updateField('fiscal', value)}
             />
           )}
         </Card>
