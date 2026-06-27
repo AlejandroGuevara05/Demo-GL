@@ -6,8 +6,9 @@ import ProgressIndicator from '../../components/ProgressIndicator'
 import SeleccionEdificio from './secciones/SeleccionEdificio'
 import InformacionContacto from './secciones/InformacionContacto'
 import InformacionFiscal from './secciones/InformacionFiscal'
+import TransferenciaElectronica from './secciones/TransferenciaElectronica'
 
-const TOTAL_STEPS = 3
+const TOTAL_STEPS = 4
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -31,6 +32,17 @@ const initialFormState = {
     pais: 'México',
     curp: '',
     regimen: '',
+  },
+  transferencia: {
+    nombreCuenta: '',
+    banco: '',
+    numeroCuenta: '',
+    clabe: '',
+    moneda: '',
+    correoPago: '',
+    constanciaSituacionFiscal: null,
+    caratulaEstadoCuenta: null,
+    opinionCumplimiento: null,
   },
 }
 
@@ -69,6 +81,21 @@ function RegistroProveedor() {
         f.pais.trim() !== '' &&
         curpOk &&
         f.regimen !== ''
+      )
+    }
+    if (step === 4) {
+      const t = formData.transferencia
+      return (
+        t.nombreCuenta.trim() !== '' &&
+        t.banco !== '' &&
+        t.numeroCuenta.length >= 10 &&
+        t.numeroCuenta.length <= 12 &&
+        t.clabe.length === 18 &&
+        t.moneda !== '' &&
+        EMAIL_REGEX.test(t.correoPago) &&
+        t.constanciaSituacionFiscal !== null &&
+        t.caratulaEstadoCuenta !== null &&
+        t.opinionCumplimiento !== null
       )
     }
     return true
@@ -112,6 +139,12 @@ function RegistroProveedor() {
             <InformacionFiscal
               value={formData.fiscal}
               onChange={(value) => updateField('fiscal', value)}
+            />
+          )}
+          {currentStep === 4 && (
+            <TransferenciaElectronica
+              value={formData.transferencia}
+              onChange={(value) => updateField('transferencia', value)}
             />
           )}
         </Card>
