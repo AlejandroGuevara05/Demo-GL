@@ -1,11 +1,7 @@
+import RegistroProveedor from './pages/RegistroProveedor'
+
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <h1 className="text-2xl font-semibold text-slate-800">
-        Grupo Legado · Registro de Proveedores
-      </h1>
-    </div>
-  )
+  return <RegistroProveedor />
 }
 
 export default App
