@@ -10,7 +10,7 @@ function Header() {
             LEGADO
           </p>
         </div>
-        <h1 className="absolute left-1/2 -translate-x-1/2 font-serif text-xl font-semibold text-cream md:text-3xl">
+        <h1 className="ml-4 flex-1 text-center font-serif text-lg font-semibold text-cream md:absolute md:left-1/2 md:ml-0 md:-translate-x-1/2 md:text-3xl">
           Registro de Proveedor
         </h1>
       </div>
