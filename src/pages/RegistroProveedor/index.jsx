@@ -4,11 +4,22 @@ import Card from '../../components/Card'
 import WizardNav from '../../components/WizardNav'
 import ProgressIndicator from '../../components/ProgressIndicator'
 import SeleccionEdificio from './secciones/SeleccionEdificio'
+import InformacionContacto from './secciones/InformacionContacto'
 
-const TOTAL_STEPS = 1
+const TOTAL_STEPS = 2
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const initialFormState = {
   edificio: '',
+  contacto: {
+    nombreComercial: '',
+    contactoVenta: '',
+    puestoContacto: '',
+    telefono: '',
+    celular: '',
+    correo: '',
+  },
 }
 
 function RegistroProveedor() {
@@ -21,6 +32,17 @@ function RegistroProveedor() {
 
   const isStepValid = (step) => {
     if (step === 1) return formData.edificio !== ''
+    if (step === 2) {
+      const c = formData.contacto
+      return (
+        c.nombreComercial.trim() !== '' &&
+        c.contactoVenta.trim() !== '' &&
+        c.puestoContacto.trim() !== '' &&
+        c.telefono.length === 10 &&
+        c.celular.length === 10 &&
+        EMAIL_REGEX.test(c.correo)
+      )
+    }
     return true
   }
 
@@ -50,6 +72,12 @@ function RegistroProveedor() {
             <SeleccionEdificio
               value={formData.edificio}
               onChange={(value) => updateField('edificio', value)}
+            />
+          )}
+          {currentStep === 2 && (
+            <InformacionContacto
+              value={formData.contacto}
+              onChange={(value) => updateField('contacto', value)}
             />
           )}
         </Card>
