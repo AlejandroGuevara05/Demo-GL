@@ -7,10 +7,9 @@ import SeleccionEdificio from './secciones/SeleccionEdificio'
 import InformacionContacto from './secciones/InformacionContacto'
 import InformacionFiscal from './secciones/InformacionFiscal'
 import TransferenciaElectronica from './secciones/TransferenciaElectronica'
+import Confirmacion from './secciones/Confirmacion'
 
-const TOTAL_STEPS = 4
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const TOTAL_STEPS = 5
 
 const initialFormState = {
   edificio: '',
@@ -44,61 +43,19 @@ const initialFormState = {
     caratulaEstadoCuenta: null,
     opinionCumplimiento: null,
   },
+  confirmacion: {
+    codigoRegistro: '',
+    avisoPrivacidad: false,
+  },
 }
 
 function RegistroProveedor() {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState(initialFormState)
+  const [submitted, setSubmitted] = useState(false)
 
   const updateField = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const isStepValid = (step) => {
-    if (step === 1) return formData.edificio !== ''
-    if (step === 2) {
-      const c = formData.contacto
-      return (
-        c.nombreComercial.trim() !== '' &&
-        c.contactoVenta.trim() !== '' &&
-        c.puestoContacto.trim() !== '' &&
-        c.telefono.length === 10 &&
-        c.celular.length === 10 &&
-        EMAIL_REGEX.test(c.correo)
-      )
-    }
-    if (step === 3) {
-      const f = formData.fiscal
-      const curpOk = f.curp === '' || f.curp.length === 18
-      return (
-        f.razonSocial.trim() !== '' &&
-        f.rfc.length >= 10 &&
-        f.rfc.length <= 13 &&
-        f.domicilio.trim() !== '' &&
-        f.ciudad.trim() !== '' &&
-        f.estado.trim() !== '' &&
-        f.codigoPostal.length === 5 &&
-        f.pais.trim() !== '' &&
-        curpOk &&
-        f.regimen !== ''
-      )
-    }
-    if (step === 4) {
-      const t = formData.transferencia
-      return (
-        t.nombreCuenta.trim() !== '' &&
-        t.banco !== '' &&
-        t.numeroCuenta.length >= 10 &&
-        t.numeroCuenta.length <= 12 &&
-        t.clabe.length === 18 &&
-        t.moneda !== '' &&
-        EMAIL_REGEX.test(t.correoPago) &&
-        t.constanciaSituacionFiscal !== null &&
-        t.caratulaEstadoCuenta !== null &&
-        t.opinionCumplimiento !== null
-      )
-    }
-    return true
   }
 
   const handleBack = () => {
@@ -110,10 +67,35 @@ function RegistroProveedor() {
       setCurrentStep((s) => s + 1)
     } else {
       console.log('Formulario completado:', formData)
+      setSubmitted(true)
     }
   }
 
   const isLastStep = currentStep === TOTAL_STEPS
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-cream px-4 py-8 md:px-8 md:py-12">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+          <Header />
+          <Card className="px-6 py-12 text-center md:px-12 md:py-16">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/20">
+              <span aria-hidden="true" className="text-3xl text-brand-brown">
+                ✓
+              </span>
+            </div>
+            <h2 className="mt-6 font-serif text-2xl font-semibold text-brand-brown md:text-3xl">
+              Registro enviado
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm text-ink-soft md:text-base">
+              Recibimos tu información correctamente. El equipo de Grupo Legado
+              se pondrá en contacto contigo en breve.
+            </p>
+          </Card>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-cream px-4 py-8 md:px-8 md:py-12">
@@ -147,13 +129,19 @@ function RegistroProveedor() {
               onChange={(value) => updateField('transferencia', value)}
             />
           )}
+          {currentStep === 5 && (
+            <Confirmacion
+              value={formData.confirmacion}
+              onChange={(value) => updateField('confirmacion', value)}
+            />
+          )}
         </Card>
 
         <WizardNav
           onBack={handleBack}
           onNext={handleNext}
           canGoBack={currentStep > 1}
-          canGoNext={isStepValid(currentStep)}
+          canGoNext={true}
           nextLabel={isLastStep ? 'Enviar' : 'Siguiente'}
         />
       </div>
